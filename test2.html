@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <style>
+        .header{
+            text-align: center;
+        }
+
+        input {
+            width: 150px;
+        }
+    </style>
+    <script>
+
+        var totalSubjects = ``;
+        function calc() {
+            var Grade;
+            var CreditHour;
+            var total=0;
+            for (let i = 1; i <= totalSubjects; i++) {
+                Grade = document.getElementById(`grade${i}`).value;
+                CreditHour = document.getElementById(`CreditHours${i}`).value;
+                switch (Grade) {
+                    case "A":
+                        total = total + (4 * CreditHour) / CreditHour;
+                        break;
+                    case "An":
+                        total = total + (3.75 * CreditHour) / CreditHour;
+                        break;
+                    case "Bp":
+                        total = total + (3.50 * CreditHour) / CreditHour;
+                        break;
+                    case "B":
+                        total = total + (3 * CreditHour) / CreditHour;
+                        break;
+                    case "Cp":
+                        total = total + (2.50 * CreditHour) / CreditHour;
+                        break;
+                    case "C":
+                        total = total + (2 * CreditHour) / CreditHour;
+                        break;
+                    case "Dp":
+                        total = total + (1.5 * CreditHour) / CreditHour;
+                        break;
+                    case "D":
+                        total = total + (1 * CreditHour) / CreditHour;
+                        break;
+                    case "F":
+                        total = total + (0 * CreditHour) / CreditHour;
+                        break;
+                    default:
+                        document.getElementById("results").innerHTML = "default";
+
+                }
+                document.getElementById("results").innerHTML = "<h1> GPA is : "+total/totalSubjects+"</h1>";
+            }
+        }
+        function go() {
+            var n = 0;
+            document.getElementById("results").innerHTML = "";
+            var btn = `<button class="btn btn-primary" onclick="calc()">Calculate GPA</button><br><br>`
+            totalSubjects = document.getElementById("totalsubjects").value;
+
+            var show = ``;
+            if (totalSubjects > 0) {
+                for (let i = 0; i < totalSubjects; i++) {
+                    n = n + 1;
+                    var show = show + `<input type="text" placeholder="Subject">
+                <select id="grade${n}" required>
+                    <option value="A">A</option>
+                    <option value="An">A-</option>
+                    <option value="Bp">B+</option>
+                    <option value="B">B</option>
+                    <option value="Cp">C+</option>
+                    <option value="C">C</option>
+                    <option value="Dp">D+</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
+                </select>&nbsp;
+                <select id="CreditHours${n}" required>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select><br><br>
+                ` ;
+                }
+                document.getElementById("section").innerHTML = show + btn;
+            } else {
+                document.getElementById("section").innerHTML = "";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col my-5">
+                <h2 class="header">GPA Calculator Online</h3>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Total Subjects </h3>
+                    <input type="number" min="1" id="totalsubjects">
+                    <button class="btn btn-dark" onclick="go()">Go</button>
+            </div>
+        </div>
+    </div><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-4">
+                <div id="section">
+
+                </div>
+            </div>
+            <div id="results">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
